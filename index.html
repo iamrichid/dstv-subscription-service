@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Subscribe – DSTV Made Simple</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Anime.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .bg-glass { background: rgba(30,41,59,0.87); backdrop-filter: blur(6px);}
+    /* Animates background gradient */
+    .gradient-animate {
+      animation: gradmove 10s ease-in-out alternate infinite;
+      background: linear-gradient(120deg, #222f3d 0%, #412865 50%, #092347 100%);
+    }
+    @keyframes gradmove {
+      0%{background-position:0% 50%;}
+      100%{background-position:100% 50%;}
+    }
+  </style>
+</head>
+
+<body class="gradient-animate min-h-screen text-slate-200">
+
+  <!-- Navigation Bar (Dark) -->
+  <header class="bg-slate-900/80 backdrop-blur shadow sticky top-0 z-50">
+    <nav class="max-w-5xl mx-auto flex items-center justify-between px-6 py-3">
+      <div>
+        <a href="#" class="text-3xl font-extrabold text-blue-300 drop-shadow-lg">Smart Subscribe</a>
+        <div class="text-xs text-blue-400 font-medium tracking-wide">DSTV Made Simple</div>
+      </div>
+      <ul class="hidden md:flex space-x-8 font-semibold text-blue-200">
+        <li><a href="#packages" class="hover:text-blue-400 transition">Packages</a></li>
+        <li><a href="#how" class="hover:text-blue-400 transition">How It Works</a></li>
+        <li><a href="#contact" class="hover:text-blue-400 transition">Contact</a></li>
+      </ul>
+      <button id="menu-btn" class="md:hidden text-blue-300 focus:outline-none" aria-label="Open menu">
+        <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="md:hidden fixed inset-0 z-40 bg-slate-900/50 hidden">
+      <div id="mobile-menu-panel" class="bg-slate-800 w-60 h-full fixed top-0 right-0 shadow-lg p-7 flex flex-col space-y-6 translate-x-full">
+        <a href="#packages" class="font-bold text-blue-200 hover:text-blue-400">Packages</a>
+        <a href="#how" class="font-bold text-blue-200 hover:text-blue-400">How It Works</a>
+        <a href="#contact" class="font-bold text-blue-200 hover:text-blue-400">Contact</a>
+        <button id="close-menu" class="text-left mt-4 text-red-400 font-medium hover:text-red-600">Close</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (Place after Navbar, before Steps/Packages) -->
+<section id="hero" class="max-w-5xl mx-auto text-center py-10 px-6">
+  <h2 class="text-4xl font-bold text-blue-200 mb-2 drop-shadow opacity-0">Welcome to Smart Subscribe</h2>
+  <p class="text-lg text-blue-200 mb-7 opacity-0">Instant DSTV activation. Secure payments. Expert support & promos. Enjoy more channels, fast service, and great value—effortlessly.</p>
+  <div id="hero-badges" class="flex justify-center gap-3 mb-6 flex-wrap opacity-0">
+    <span class="inline-block bg-green-700/80 text-green-200 font-medium px-4 py-2 rounded-lg shadow">1000+ Trusted Users</span>
+    <span class="inline-block bg-blue-700/80 text-blue-200 font-medium px-4 py-2 rounded-lg shadow">24/7 Support</span>
+    <span class="inline-block bg-yellow-700/80 text-yellow-200 font-medium px-4 py-2 rounded-lg shadow">Secure Payment</span>
+  </div>
+  <a href="#packages" class="bg-blue-700 text-white px-8 py-3 rounded-xl text-lg font-semibold shadow hover:bg-blue-800 hover:scale-105 transition-all hero-cta inline-block opacity-0">See Packages</a>
+</section>
+
+
+  <!-- Packages Section -->
+  <section id="packages" class="max-w-6xl mx-auto py-10 px-6">
+    <h3 class="text-3xl font-bold text-blue-300 mb-8 text-center">DSTV Packages & Benefits</h3>
+    <ul id="plans" class="grid grid-cols-1 md:grid-cols-3 gap-8"></ul>
+  </section>
+
+<section class="py-12 bg-slate-900">
+  <div class="max-w-4xl mx-auto px-6">
+    <h3 class="text-3xl font-bold text-white mb-10 text-center">How Smart Subscribe Works</h3>
+    <div id="steps" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-14"></div>
+  </div>
+</section>
+
+<div id="buy-dialog" class="fixed inset-0 flex items-center justify-center bg-black/70 z-50 hidden">
+  <form
+    id="whatsapp-form"
+    class="bg-slate-900 p-8 rounded-2xl w-96 sm:w-full max-w-full shadow-2xl space-y-6 relative max-h-[90vh] overflow-auto border border-slate-700"
+    role="dialog" aria-modal="true" aria-labelledby="orderTitle"
+  >
+    <!-- Close Icon -->
+    <button
+      type="button"
+      id="close-dialog"
+      class="absolute top-3 right-3 text-slate-500 hover:text-red-600 focus:outline-none text-2xl font-bold"
+      aria-label="Close dialog"
+    >&#10005;</button>
+    <h4 id="orderTitle" class="text-2xl font-bold mb-2 text-blue-400">Finish Your Order</h4>
+    <p class="text-slate-300 text-sm mb-3">Please fill the details below and we'll direct you to WhatsApp.</p>
+    <label for="iuc" class="block font-semibold mb-1 text-blue-300">IUC Number*</label>
+    <input
+      type="text"
+      id="iuc"
+      name="iuc"
+      required
+      autofocus
+      class="w-full px-3 py-2 border border-blue-700 rounded-lg mb-2 bg-slate-800 text-slate-100 placeholder-slate-400"
+      placeholder="Enter your IUC/Smart Card number"
+    />
+    <span class="text-xs text-slate-400 mb-4 block">Your decoder number (IUC) is required for activation.</span>
+    <label for="dialog-package" class="block font-semibold mb-1 text-blue-300">Package</label>
+    <input
+      type="text"
+      id="dialog-package"
+      name="package"
+      required
+      readonly
+      class="w-full px-3 py-2 border border-slate-700 rounded-lg mb-4 bg-slate-800 text-slate-300"
+    />
+    <label for="name" class="block font-semibold mb-1 text-blue-300">Name (optional)</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      class="w-full px-3 py-2 border border-slate-700 rounded-lg mb-4 bg-slate-800 text-slate-100 placeholder-slate-400"
+      placeholder="e.g., John Doe"
+    />
+    <div class="flex gap-3">
+      <button type="submit" class="bg-green-600 text-white font-bold px-5 py-2 rounded-lg hover:bg-green-700 transition w-full">Proceed to WhatsApp</button>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+  <!-- Contact Section -->
+  <section id="contact" class="max-w-4xl mx-auto py-10 px-6 text-center">
+    <h3 class="text-2xl font-bold text-blue-200 mb-4">Need Help?</h3>
+    <p class="text-lg mb-4 text-blue-100">Chat with our support team any time.</p>
+    <a href="https://wa.me/233249152736" target="_blank"
+      class="bg-green-700 text-white font-bold px-6 py-3 rounded-lg hover:bg-green-800 shadow transition">
+      WhatsApp Support
+    </a>
+    <div class="mt-6 text-sm text-blue-600">Smart Subscribe &mdash; All rights reserved &copy; 2025</div>
+  </section>
+
+   <script type="module" src="/src/main.js"></script>
+</body>
+</html>
