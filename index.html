@@ -24,20 +24,38 @@
 </head>
 <body class="gradient-animate min-h-screen text-slate-200">
 
-  <!-- NavBar & Tabs -->
-  <header class="bg-slate-900/80 backdrop-blur shadow sticky top-0 z-50">
-    <nav class="max-w-5xl mx-auto flex items-center justify-between px-6 py-3">
-      <div>
-        <a href="#" class="text-3xl font-extrabold text-blue-300 drop-shadow-lg">Smart Subscribe</a>
-        <div class="text-xs text-blue-400 font-medium tracking-wide">Multi-Service Subscriptions</div>
-      </div>
-      <ul id="tabs" class="flex space-x-3 font-semibold text-blue-200">
-        <li><button data-service="dstv" class="tab-btn rounded-t-md px-3 py-2 border-b-2 border-transparent transition">DSTV</button></li>
-        <li><button data-service="netflix" class="tab-btn rounded-t-md px-3 py-2 border-b-2 border-transparent transition">Netflix</button></li>
-        <li><button data-service="prime" class="tab-btn rounded-t-md px-3 py-2 border-b-2 border-transparent transition">Prime Video</button></li>
-      </ul>
-    </nav>
-  </header>
+<header class="bg-slate-900/80 backdrop-blur shadow sticky top-0 z-50">
+  <nav class="max-w-5xl mx-auto flex items-center justify-between px-6 py-3">
+    <div>
+      <a href="#" class="text-3xl font-extrabold text-blue-300 drop-shadow-lg">Smart Subscribe</a>
+      <div class="text-xs text-blue-400 font-medium tracking-wide">Multi-Service Subscriptions</div>
+    </div>
+    <ul id="tabs" class="hidden md:flex flex-wrap justify-center space-x-3 font-semibold text-blue-200 py-2 gap-1">
+      <li><button data-service="dstv" class="tab-btn px-4 py-3 rounded-md text-base border-b-2 border-transparent transition">DSTV</button></li>
+      <li><button data-service="netflix" class="tab-btn px-4 py-3 rounded-md text-base border-b-2 border-transparent transition">Netflix</button></li>
+      <li><button data-service="prime" class="tab-btn px-4 py-3 rounded-md text-base border-b-2 border-transparent transition">Prime Video</button></li>
+    </ul>
+    <!-- Hamburger -->
+    <button id="menu-btn" class="md:hidden text-blue-300 focus:outline-none" aria-label="Open menu">
+      <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu (hidden by default) -->
+ <!-- Mobile Menu (full screen overlay) -->
+<div id="mobile-menu" class="md:hidden fixed inset-0 z-100 bg-slate-900/95 justify-center items-center hidden">
+  <div class="flex flex-col gap-5 w-full max-w-xs mx-auto p-8 bg-slate-800 rounded-2xl shadow-2xl">
+    <button data-service="dstv" class="tab-btn text-2xl font-bold text-blue-300 py-4 rounded hover:bg-slate-900 hover:text-blue-400 transition">DSTV</button>
+    <button data-service="netflix" class="tab-btn text-2xl font-bold text-blue-300 py-4 rounded hover:bg-slate-900 hover:text-blue-400 transition">Netflix</button>
+    <button data-service="prime" class="tab-btn text-2xl font-bold text-blue-300 py-4 rounded hover:bg-slate-900 hover:text-blue-400 transition">Prime Video</button>
+    <button id="close-menu" class="text-lg mt-8 text-red-400 font-medium hover:text-red-600">Close</button>
+  </div>
+</div>
+
+</header>
+
 
   <!-- Dynamic Hero Section -->
   <section id="hero" class="max-w-5xl mx-auto text-center py-12 px-6"></section>
@@ -85,6 +103,26 @@
   </section>
 
 <script type="module">
+
+// Hamburger menu logic
+const menuBtn = document.getElementById('menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const closeMenu = document.getElementById('close-menu');
+
+menuBtn.onclick = () => {
+  mobileMenu.classList.remove('hidden');
+};
+closeMenu.onclick = () => {
+  mobileMenu.classList.add('hidden');
+};
+// Tab selection closes menu
+mobileMenu.addEventListener('click', function(e) {
+  if (e.target.classList.contains('tab-btn')) {
+    mobileMenu.classList.add('hidden');
+  }
+});
+
+
 // Service data
 const services = {
   dstv: {
