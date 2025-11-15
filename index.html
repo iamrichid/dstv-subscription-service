@@ -85,7 +85,7 @@
       <label for="iuc" class="block font-semibold mb-1 text-blue-300" id="iuc-label"></label>
       <input type="text" id="iuc" name="iuc" required autofocus class="w-full px-3 py-2 border border-blue-700 rounded-lg mb-2 bg-slate-800 text-slate-100 placeholder-slate-400" />
       <span class="text-xs text-slate-400 mb-4 block" id="iuc-desc"></span>
-      <label for="dialog-package" class="block font-semibold mb-1 text-blue-300">Plan</label>
+      <label for="dialog-package" class="block font-semibold mb-1 text-blue-300">Package</label>
       <input type="text" id="dialog-package" name="package" required readonly class="w-full px-3 py-2 border border-slate-700 rounded-lg mb-4 bg-slate-800 text-slate-300" />
 
       <label for="dialog-month" class="block font-semibold mb-1 text-blue-300">Duration (Months)</label>
@@ -148,7 +148,7 @@ const services = {
     steps: [
       {icon: 'cart', title: '1. Select Package', desc: 'Choose your DSTV package and click "Subscribe".'},
       {icon: 'chat', title: '2. Fill Details', desc: 'Enter your IUC number (and name, if you wish), then proceed.'},
-      {icon: 'party', title: '3. Enjoy Service', desc: 'Your subscription is activated in less than 5 minutes!'}
+      {icon: 'party', title: '3. Enjoy Service', desc: 'Your subscription is activated instantly!'}
     ],
     packages: [
       { name: 'Premium', oldPrice: 'GH₵865', newPrice: 'GH₵400', channels: ['SuperSport','M-Net','142+'], theme: 'ring-blue-700 bg-slate-900' },
@@ -171,7 +171,7 @@ const services = {
         {text: 'Secure Payment', bg: 'bg-green-700/80 text-green-200'}
       ]
     },
-    packagesLabel: 'Netflix Packages',
+    packagesLabel: 'Netflix Plan',
     orderInstructions: 'Please fill the details below and we’ll direct you to WhatsApp.',
     iucLabel: 'Email/Phone*',
     iucPlaceholder: 'Enter your Netflix email or phone',
@@ -189,7 +189,7 @@ const services = {
       { name: 'Yearly (Personal)', newPrice: 'GH₵1200', channels: ['Personal'], theme: 'ring-yellow-700 bg-slate-900' }
     ],
     orderBuilder: (user, pack, name) =>
-      `Hi\nI am interested in the Netflix ${pack} plan\n\nMy login is: ${user}\n${name ? `Name: ${name}` : ''}`
+      `Hi\nI am interested in the Netflix ${pack} plan\n${name ? `Name: ${name}` : ''}`
   },
   prime: {
     hero: {
