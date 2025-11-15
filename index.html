@@ -162,7 +162,7 @@ const services = {
       { name: 'Padi', oldPrice: 'GH₵59', newPrice: 'GH₵40', channels: ['Basic', '40+'], theme: 'ring-indigo-700 bg-slate-900' },
     ],
     orderBuilder: (user, pack, name, months) => 
-  `Hello! I would like to subscribe to DSTV.\n\nPackage: ${pack}${months ? `\nDuration: ${months} month(s)` : ''}\nIUC Number: ${user}${name ? `\nName: ${name}` : ''}\n\nThank you.`
+  `Hello! I would like to subscribe to DSTV.\n\nIUC Number: ${user}${name ? `\nPackage: ${name}` : ''}\nDuration: ${months ? `${months} month(s)` : ''}\n\nThank you.`
   },
   netflix: {
     hero: {
