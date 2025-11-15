@@ -100,7 +100,7 @@ const svgIcons = {
   party: `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="2" d="M5.5 6A2.5 2.5 0 013 3.5m0 0A2.5 2.5 0 016.5 6m0 0A2.5 2.5 0 013 3.5m15.5-1A3.5 3.5 0 0119 7m0 0A3.5 3.5 0 0115.5 2m0 0A3.5 3.5 0 0119 7M12 7v10m-5 5l2.5-2.5M21 21l-2.5-2.5" /></svg>`
 };
 
-const phone = '233249152736';
+const phone = '233247464419';
 
 let serviceKey = 'dstv'; // default on page load
 

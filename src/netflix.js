@@ -33,7 +33,7 @@ const packageData = [
   { name: 'Yearly (Personal)', newPrice: 'GH₵1200', channels: ['Personal'], theme: 'ring-yellow-700 bg-slate-900' }
 ];
 
-const phone = '233249152736';
+const phone = '233247464419';
 
 // ----------- STEP RENDER -----------
 function renderSteps() {
