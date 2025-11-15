@@ -85,8 +85,11 @@
       <label for="iuc" class="block font-semibold mb-1 text-blue-300" id="iuc-label"></label>
       <input type="text" id="iuc" name="iuc" required autofocus class="w-full px-3 py-2 border border-blue-700 rounded-lg mb-2 bg-slate-800 text-slate-100 placeholder-slate-400" />
       <span class="text-xs text-slate-400 mb-4 block" id="iuc-desc"></span>
-      <label for="dialog-package" class="block font-semibold mb-1 text-blue-300">Package</label>
-      <input type="text" id="dialog-package" name="package" required readonly class="w-full px-3 py-2 border border-slate-700 rounded-lg mb-4 bg-slate-800 text-slate-300" />
+      
+      <label for="dialog-package" class="block font-semibold mb-1 text-slate-300">Package</label>
+      <select id="dialog-package" name="package" required class="w-full px-3 py-2 border border-slate-700 rounded mb-3 bg-slate-800 text-slate-100">
+        <!-- options will be filled from JS -->
+      </select>
 
       <label for="dialog-month" class="block font-semibold mb-1 text-blue-300">Duration (Months)</label>
       <input type="number" id="dialog-month" name="month" min="1" max="12" required class="w-full px-3 py-2 border border-slate-700 rounded-lg mb-4 bg-slate-800 text-slate-100 placeholder-slate-400" placeholder="e.g., 1" />
@@ -384,6 +387,37 @@ document.addEventListener('DOMContentLoaded', () => {
     renderPackages(services[key]);
     renderSteps(services[key]);
   }
+
+  function fillPackageDropdown() {
+  const select = document.getElementById('dialog-package');
+  select.innerHTML = '';
+  services[active].packages.forEach(pkg => {
+    const opt = document.createElement('option');
+    opt.value = pkg.name;
+    opt.textContent = pkg.name;
+    select.appendChild(opt);
+  });
+}
+
+// Call fillPackageDropdown when showing the modal
+document.getElementById('plans').addEventListener('click', function(e) {
+  const btn = e.target.closest('.buy-btn');
+  if (btn) {
+    // Populate dropdown for current service
+    if (active === 'dstv') {
+      fillPackageDropdown();
+      // Optional: pre-select the plan that was clicked
+      document.getElementById('dialog-package').value = btn.getAttribute('data-package');
+    } else {
+      // For Netflix, Prime, you can use a readonly input as before
+      document.getElementById('dialog-package').value = btn.getAttribute('data-package');
+    }
+    document.getElementById('buy-dialog').classList.remove('hidden');
+    setupModal(active);
+    setTimeout(() => { document.getElementById('iuc').focus(); }, 120);
+  }
+});
+
 });
 </script>
 </body>
