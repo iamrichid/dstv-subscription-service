@@ -161,8 +161,16 @@ const services = {
       { name: 'Access', oldPrice: 'GH₵90', newPrice: 'GH₵60', channels: ['Access', '67+'], theme: 'ring-teal-700 bg-slate-900' },
       { name: 'Padi', oldPrice: 'GH₵59', newPrice: 'GH₵40', channels: ['Basic', '40+'], theme: 'ring-indigo-700 bg-slate-900' },
     ],
-    orderBuilder: (user, pack, name, months) => 
-  `Hello! I would like to subscribe to DSTV.\n\nIUC Number: ${user}${name ? `\nPackage: ${name}` : ''}\nDuration: ${months ? `${months} month(s)` : ''}\n\nThank you.`
+    orderBuilder: (user, pack, month, name) =>
+        `Hello! I would like to subscribe to DSTV.
+
+      IUC Number: ${user}
+      Package: ${pack}
+      ${month ? `Duration: ${month} month(s)\n` : ""}
+      ${name ? `\nUser: ${name}` : ""}
+
+      Thank you.`
+
   },
   netflix: {
     hero: {
@@ -376,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pack = document.getElementById('dialog-package').value.trim();
     const month = document.getElementById('dialog-month') ? document.getElementById('dialog-month').value.trim() : '';
     const name = document.getElementById('name').value.trim();
-    const msg = services[active].orderBuilder(user, month, pack, name,month);
+    const msg = services[active].orderBuilder(user, pack, month, name);
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
     dialog.classList.add('hidden');
